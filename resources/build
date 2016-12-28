@@ -40,8 +40,11 @@ mv /resources/knife.rb /etc/chef/knife.rb
 mkdir -p /usr/local/bin/chef-server-backup
 mv /resources/backup.sh /usr/local/bin/chef-server-backup/backup.sh
 
-groupadd chef-server
-useradd -g chef-server chef-server
+groupadd chef
+useradd -g chef chef
+
+# Add entrypoint
+mv /resources/entrypoint.sh /entrypoint.sh
 
 # Cleanup
 cd /
