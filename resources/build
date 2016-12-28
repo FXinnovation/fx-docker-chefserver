@@ -1,0 +1,50 @@
+#!/bin/sh
+set -e -x
+
+# Temporary work dir
+tmpdir="`mktemp -d`"
+cd "$tmpdir"
+
+# Install prerequisites
+export DEBIAN_FRONTEND=noninteractive
+apt-get update -q --yes
+apt-get install -q --yes logrotate vim-nox hardlink wget ca-certificates
+
+# Download and install Chef's packages
+wget -nv https://packages.chef.io/files/stable/chef-server/12.4.1/ubuntu/14.04/chef-server-core_12.4.1-1_amd64.deb 
+wget -nv https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/10.04/x86_64/chef_12.7.2-1_amd64.deb
+
+sha1sum -c - <<EOF
+a75e8dbcce749adf61a60ca0ccf25fc041e4774a  chef-server-core_12.4.1-1_amd64.deb
+9bc701d90ba12c71fbe51a8bdcdf25e864375f4e  chef_12.7.2-1_amd64.deb
+EOF
+
+dpkg -i chef-server-core_12.4.1-1_amd64.deb chef_12.7.2-1_amd64.deb
+
+# Extra setup
+rm -rf /etc/opscode
+mkdir -p /etc/cron.hourly
+ln -sfv /var/opt/opscode/log /var/log/opscode
+ln -sfv /var/opt/opscode/etc /etc/opscode
+ln -sfv /opt/opscode/sv/logrotate /opt/opscode/service
+ln -sfv /opt/opscode/embedded/bin/sv /opt/opscode/init/logrotate
+chef-apply -e 'chef_gem "knife-opc"'
+
+mv /resources/init.rb /init.rb
+mkdir -p /.chef
+mv /resources/chef-server.rb /.chef/chef-server.rb
+mkdir -p /opt/opscode/sv
+mv /resources/logrotate /opt/opscode/sv/logrotate
+mkdir -p /etc/chef
+mv /resources/knife.rb /etc/chef/knife.rb
+mkdir -p /usr/local/bin/chef-server-backup
+mv /resources/backup.sh /usr/local/bin/chef-server-backup/backup.sh
+
+groupadd chef-server
+useradd -g chef-server chef-server
+
+# Cleanup
+cd /
+rm -rf $tmpdir /tmp/install.sh /var/lib/apt/lists/* /var/cache/apt/archives/*
+
+
