@@ -31,16 +31,32 @@ if [ $CHEF_BOOTSTRAP ]; then
   # Create default user and organisation
   ###
   echo "### Creating Organsation"
-
+  chef-server-ctl org-create \
+    short_name "$CHEF_ORGANIZATION" \
+    --association_user $CHEF_USER \
+    --filename /var/opt/opscode/$CHEF_ORGANIZATION.pem
   echo "### Creating User"
-  
+  chef-server-ctl user-create \
+    $CHEF_USER \
+    $CHEF_FIRST_NAME \
+    $CHEF_LAST_NAME \
+    $CHEF_EMAIL \
+    "$CHEF_PASSWORD" 
+    --filename /var/opt/opscode/$CHEF_USER.pem
   ###
   # Displaying information
   ###
   echo "############################################################"
   echo "###                     Information                     ### "
   echo "############################################################"
-
+  echo "# Chef User : $CHEF_USER                                   #"
+  echo "# User Password : $CHEF_PASSWORD                           #"
+  echo "# User Validator :                                         #"
+  cat /var/opt/opscode/$CHEF_USER.pem
+  echo "# Chef Organization : $CHEF_ORGANIZATION                   #"
+  echo "#                                                          #"
+  echo "# Organization Validator:                                  #"
+  cat /var/opt/opscode/$CHEF_ORGANIZATION.pem
   echo "############################################################"
   echo "###                         End                         ### "
   echo "############################################################"
