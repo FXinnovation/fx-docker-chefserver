@@ -7,8 +7,7 @@ ENV CHEF_ORGANISATION=example.com \
     CHEF_FIRST_NAME=admin \
     CHEF_LAST_NAME=admin \
     CHEF_EMAIL=admin@example.com \
-    CHEF_PASSWORD=pleasechangethis \
-    CHEF_ORGANIZATION=example.com
+    CHEF_PASSWORD=pleasechangethis
 
 EXPOSE 80 443 
 
