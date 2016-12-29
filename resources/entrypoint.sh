@@ -16,6 +16,10 @@ else
   CHEF_BOOTSTRAP=false
 fi
 ###
+# Deleting bootstrapped file
+###
+rm -f /var/opt/opscode/bootstrapped
+###
 # Launch chef-server 
 ###
 /opt/opscode/embedded/bin/ruby init.rb > /tmp/chef.log &
