@@ -59,4 +59,10 @@ mv /resources/entrypoint.sh /entrypoint.sh
 cd /
 rm -rf $tmpdir /tmp/install.sh /var/lib/apt/lists/* /var/cache/apt/archives/*
 
+# Initialization of chef
+/opt/opscode/embedded/bin/ruby init.rb > /tmp/chef.log &
+CHEF_PID=$!
+grep -m 1 "INIT: Reconfiguration finished" <(tail -f /tmp/chef.log)
 
+rm -rf /tmp/chef.log
+rm -rf /var/opt/opscode/*
