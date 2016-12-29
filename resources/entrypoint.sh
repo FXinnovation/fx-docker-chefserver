@@ -36,7 +36,7 @@ if [ $CHEF_BOOTSTRAP ]; then
     $CHEF_FIRST_NAME \
     $CHEF_LAST_NAME \
     $CHEF_EMAIL \
-    "$CHEF_PASSWORD" 
+    "$CHEF_PASSWORD" \
     --filename /var/opt/opscode/$CHEF_USER.pem
   echo "### Creating Organsation"
   chef-server-ctl org-create \
