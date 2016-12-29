@@ -30,11 +30,6 @@ if [ $CHEF_BOOTSTRAP ]; then
   ###
   # Create default user and organisation
   ###
-  echo "### Creating Organsation"
-  chef-server-ctl org-create \
-    short_name "$CHEF_ORGANISATION" \
-    --association_user $CHEF_USER \
-    --filename /var/opt/opscode/$CHEF_ORGANISATION.pem
   echo "### Creating User"
   chef-server-ctl user-create \
     $CHEF_USER \
@@ -43,6 +38,11 @@ if [ $CHEF_BOOTSTRAP ]; then
     $CHEF_EMAIL \
     "$CHEF_PASSWORD" 
     --filename /var/opt/opscode/$CHEF_USER.pem
+  echo "### Creating Organsation"
+  chef-server-ctl org-create \
+    short_name "$CHEF_ORGANISATION" \
+    --association_user $CHEF_USER \
+    --filename /var/opt/opscode/$CHEF_ORGANISATION.pem
   ###
   # Displaying information
   ###
