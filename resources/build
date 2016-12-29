@@ -40,8 +40,17 @@ mv /resources/knife.rb /etc/chef/knife.rb
 mkdir -p /usr/local/bin/chef-server-backup
 mv /resources/backup.sh /usr/local/bin/chef-server-backup/backup.sh
 
+# Adding user chef
 groupadd chef
 useradd -g chef chef
+
+# Adding user opscode
+groupadd opscode
+useradd -g opscode -d /opt/opscode/embedded -s /bin/sh opscode
+
+# Adding user opscode-pgsql
+groupadd opscode-pgsql
+useradd -g opscode-pgsql -d /var/opt/opscode/postgresql -s /bin/sh opscode-pgsql
 
 # Add entrypoint
 mv /resources/entrypoint.sh /entrypoint.sh
