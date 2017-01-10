@@ -40,7 +40,7 @@ if [ $CHEF_BOOTSTRAP ]; then
     --filename /var/opt/opscode/$CHEF_USER.pem
   echo "### Creating Organsation"
   chef-server-ctl org-create \
-    --short_name "$CHEF_ORGANISATION" \
+    "$CHEF_ORGANISATION" "$CHEF_ORGANISATION" \
     --association_user $CHEF_USER \
     --filename /var/opt/opscode/$CHEF_ORGANISATION.pem
   ###
