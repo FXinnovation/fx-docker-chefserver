@@ -2,7 +2,7 @@ FROM ubuntu:14.04
 
 MAINTAINER FXinnovation
 
-ENV CHEF_ORGANISATION=example.com \
+ENV CHEF_ORGANISATION=example \
     CHEF_USER=admin \
     CHEF_FIRST_NAME=admin \
     CHEF_LAST_NAME=admin \
