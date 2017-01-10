@@ -6,7 +6,7 @@ set -e
 ###
 # Making sure data volume has good permissions
 ###
-chown -r chef:chef /var/opt/opscode
+chown -r opscode:opscode /var/opt/opscode
 ###
 # If there is no data, create some
 ###
