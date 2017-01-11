@@ -6,7 +6,7 @@ set -e
 ###
 # If there is no data, create some
 ###
-if [ "$(ls -A /var/opt/opscode)" == "" ]; then
+if [ -f /var/opt/opscode/bootstrapped ]; then
   CHEF_BOOTSTRAP=true
 else
   CHEF_BOOTSTRAP=false
@@ -16,7 +16,7 @@ fi
 ###
 /opt/opscode/embedded/bin/ruby init.rb > /tmp/chef.log &
 CHEF_PID=$!
-if [ $CHEF_BOOTSTRAP ]; then
+if [ ! $CHEF_BOOTSTRAP ]; then
   ###
   # Checking if waitin 
   ###
