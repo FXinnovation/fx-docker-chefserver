@@ -16,7 +16,7 @@ fi
 ###
 /opt/opscode/embedded/bin/ruby init.rb > /tmp/chef.log &
 CHEF_PID=$!
-if [ $CHEF_BOOTSTRAP ]; then
+if $CHEF_BOOTSTRAP; then
   ###
   # Waiting for configuration
   ###
