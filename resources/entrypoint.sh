@@ -7,18 +7,18 @@ set -e
 # If there is no data, create some
 ###
 if [ -f /var/opt/opscode/bootstrapped ]; then
-  CHEF_BOOTSTRAP=true
-else
   CHEF_BOOTSTRAP=false
+else
+  CHEF_BOOTSTRAP=true
 fi
 ###
 # Launch chef-server 
 ###
 /opt/opscode/embedded/bin/ruby init.rb > /tmp/chef.log &
 CHEF_PID=$!
-if [ ! $CHEF_BOOTSTRAP ]; then
+if [ $CHEF_BOOTSTRAP ]; then
   ###
-  # Checking if waitin 
+  # Waiting for configuration
   ###
   echo "### No existing configuration - Configurating now"
   echo "### Waiting for chef to be ready"
@@ -57,7 +57,7 @@ if [ ! $CHEF_BOOTSTRAP ]; then
   echo "############################################################"
 fi
 ###
-# Launch chef-server
+# Tailing chef-server logs
 ###
 echo "Tailing Logs"
 tail -F /var/log/opscode/*/*
