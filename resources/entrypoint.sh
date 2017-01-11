@@ -4,10 +4,6 @@ set -e
 # IMPORTANT: This is very UGLY, need some help to refactor here properly. UGLY but WORKS!
 ###
 ###
-# Making sure data volume has good permissions
-###
-chown -R opscode:opscode /var/opt/opscode
-###
 # If there is no data, create some
 ###
 if [ "$(ls -A /var/opt/opscode)" == "" ]; then
@@ -64,4 +60,4 @@ fi
 # Launch chef-server
 ###
 echo "Tailing Logs"
-tail -F /tmp/chef.log
+tail -F /var/log/opscode/*/*
