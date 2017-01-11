@@ -3,6 +3,7 @@
 This repository contains all the files to create a docker container with chef-server 12 installed and working. If there is no data, the user specified in the environment variables will be created and the credentials will be given in the logs. If the volume contains data, it will just start chef-server
 ## Usage
 ### Simple Usage
+`IMPORTANT: [PATH/TO/CHEF] has to belong to root for it to work!`
 ```
 docker run -d \ 
   -v [PATH/TO/CHEF]:/var/opt/opscode \
