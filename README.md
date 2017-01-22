@@ -23,6 +23,7 @@ docker run -d \
   -e CHEF_LAST_NAME=[LAST_NAME] \
   -e CHEF_EMAIL=[EMAIL] \
   -e CHEF_PASSWORD=[PASSWORD] \
+  -e PUBLIC_URL=[PUBLIC_URL] \
   -p [PORT]:80 \
   -p [PORT]:443 \
   fxinnovation/chefserver:[TAG]
