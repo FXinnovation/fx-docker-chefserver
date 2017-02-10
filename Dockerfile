@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 
-MAINTAINER FXinnovation
+MAINTAINER FXinnovation <cloudsquad@fxinnovation.com>
 
 ENV CHEF_ORGANISATION=example \
     CHEF_USER=admin \
@@ -8,7 +8,7 @@ ENV CHEF_ORGANISATION=example \
     CHEF_LAST_NAME=admin \
     CHEF_EMAIL=admin@example.com \
     CHEF_PASSWORD=pleasechangethis \
-    PUBLIC_URL=chef.example.com
+    PUBLIC_URL=http://chef.example.com
 
 EXPOSE 80 443 
 
