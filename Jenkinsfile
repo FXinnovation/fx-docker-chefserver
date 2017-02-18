@@ -27,10 +27,9 @@ node {
     stage("build") {
       // Building Docker Image
       sh "docker build \
-           --label \"org.label-schema.vcs-ref\"=\"${commit_id}\" \
-           --label \"org.label-schema.version\"=\"${tag_id}\" \
-           --label \"org.label-schema.build-date\"=\"\$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")\" \
-           --label \"org.label-schema.usage\"=\"${scm_url}/src?at=${tag_id}\" \
+           --build-arg \"VCS_REF\"=\"${commit_id}\" \
+           --build-arg \"VERSION\"=\"${tag_id}\" \
+           --build-arg \"BUILD_DATE\"=\"\$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")\" \
            -t ${dockerhub_repo}:${tag_id} ."
     }
     stage("test") {
