@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:18.04
 
 ENV CHEF_VERSION=12.7.2 \
     CHEF_SHA1=9bc701d90ba12c71fbe51a8bdcdf25e864375f4e \
@@ -29,7 +29,7 @@ ENTRYPOINT ["/entrypoint.sh"]
 LABEL "maintainer"="cloudsquad@fxinnovation.com" \
       "org.label-schema.name"="chefserver" \
       "org.label-schema.base-image.name"="docker.io/library/ubuntu" \
-      "org.label-schema.base-image.version"="14.04" \
+      "org.label-schema.base-image.version"="18.04" \
       "org.label-schema.description"="Chef-Server in a container" \
       "org.label-schema.url"="https://www.chef.io" \
       "org.label-schema.vcs-url"="https://bitbucket.org/fxadmin/public-common-docker-chefserver" \
